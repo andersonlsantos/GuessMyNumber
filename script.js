@@ -10,31 +10,29 @@ const selAll = (idClass) => {
     return elem
 }
 
-let rand = () => {
-    let lista = []
+sel('#b1').addEventListener('click', () => {
 
-    for(let som = 1; som <= 20; som++){
-        lista.push(som)
-    }
-    
-    let randi = Math.round(Number(Math.random() * 19))
+    let rand = Math.round(Math.random() * 20)
 
-    return lista[randi]
-}
+    let guess = Number(sel('.guess').value)
 
-let guess = sel('.guess')
-
-function controlRand(){
-    let num = Number(guess.value)
-
-    // console.log(rand(), num)
-
-    if(rand() === num) {
-        console.log(`Acertou, ${num} == ${rand()}`)
+    if(guess < 1 || guess > 20) {
+        sel('.number').textContent = `?`
     }else{
-        console.log(`Errou, ${num} != ${rand()}`)
+        sel('.number').textContent = `${rand}`
     }
-}
 
-let b1 = sel('#b1').onclick = controlRand
+    // console.log(rand, guess)
+
+    if(guess < 1 || guess > 20) {
+        sel('.message').textContent = 'invalid number !!'
+    }else{
+        if(rand === guess) {
+            sel('.message').textContent = 'You won ....'
+        }else{
+            if(guess > rand) sel('.message').textContent = 'Lower ....'
+            if(guess < rand) sel('.message').textContent = 'Higher ....'
+        }
+    }
+})
 
