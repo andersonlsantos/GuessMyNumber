@@ -36,6 +36,7 @@ const controlClick = () => {
             sel('.message').textContent = 'You won ....'
             sel('body').style.backgroundColor = 'green'
             sel('.number').textContent = `${rand}`
+            sel('.highscore').textContent = 20 - score
             cont = 0
         }else{
             if(score > 0){
