@@ -23,29 +23,26 @@ const controlClick = () => {
     let guess = Number(sel('.guess').value)
 
     if(score >= 0) sel('.score').textContent = score.toString()
-    if(score === 0) {
+    if(score < 0) {
         sel('#b1').disabled = true
         sel('.message').textContent = 'Game Over ...'
         sel('body').style.backgroundColor = 'red'
     }
 
-    if(guess < 1 || guess > 20) {
-        sel('.number').textContent = `?`
-    }else{
-        sel('.number').textContent = `${rand}`
-    }
-
     if(guess < 1 || guess > 20 && score !== 0) {
-        sel('.message').textContent = 'invalid number !!'
-    }else{
+        if(score > 0) sel('.message').textContent = 'invalid number !!'
+    } else {
         if(rand === guess) {
             sel('.message').textContent = 'You won ....'
             sel('body').style.backgroundColor = 'green'
+            sel('.number').textContent = `${rand}`
             cont = 0
         }else{
-            if(guess > rand) sel('.message').textContent = 'Lower ....'
-            if(guess < rand) sel('.message').textContent = 'Higher ....'
-            sel('body').style.backgroundColor = '#222'
+            if(score > 0){
+                if(guess > rand) sel('.message').textContent = 'Lower ....'
+                if(guess < rand) sel('.message').textContent = 'Higher ....'
+                sel('body').style.backgroundColor = '#222'
+            }
         }
     }
 
@@ -59,3 +56,4 @@ const controlClick = () => {
 
 sel('#b1').addEventListener('click', controlClick)
 
+sel('.again').addEventListener('click', () => location.reload())
